@@ -1,5 +1,7 @@
 # RAG-Document-Q-A
 
+<img width="1125" height="910" alt="image" src="https://github.com/user-attachments/assets/2b492dc6-08e4-4b60-b184-62ad92a5393b" />
+
 A polished React + Vite application for Retrieval-Augmented Generation. Paste a document, index it, and ask precise questions grounded in the text.
 
 ## Features
