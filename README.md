@@ -1,5 +1,7 @@
 # DocQ — Document Q&A
 
+[![Live Demo](https://img.shields.io/badge/demo-live-green?logo=vercel)](https://docq-gamma.vercel.app/)
+
 A simple React + Vite app for asking questions about your own documents. Paste text, index it locally, and get relevant passages back instantly.
 
 Live demo: https://docq-gamma.vercel.app/
