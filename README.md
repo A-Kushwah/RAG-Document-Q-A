@@ -2,6 +2,8 @@
 
 A simple React + Vite app for asking questions about your own documents. Paste text, index it locally, and get relevant passages back instantly.
 
+Live demo: https://docq-gamma.vercel.app/
+
 ## Features
 
 - Paste or type document text and keep it in-browser
