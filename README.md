@@ -1,16 +1,13 @@
-# RAG-Document-Q-A
+# DocQ — Document Q&A
 
-<img width="1125" height="910" alt="image" src="https://github.com/user-attachments/assets/2b492dc6-08e4-4b60-b184-62ad92a5393b" />
-
-A polished React + Vite application for Retrieval-Augmented Generation. Paste a document, index it, and ask precise questions grounded in the text.
+A simple React + Vite app for asking questions about your own documents. Paste text, index it locally, and get relevant passages back instantly.
 
 ## Features
 
-- Document chunking with overlapping windows
-- Lightweight hash-based embeddings for local similarity retrieval
-- Cosine similarity ranking for relevant chunk selection
-- Claude-powered responses using retrieved context
-- Clean UI with chat-style results and formatting support
+- Paste or type document text and keep it in-browser
+- Automatic chunking for better retrieval across long content
+- Local similarity matching with cosine score ranking
+- Friendly UI designed for notes, articles, meeting summaries, and research
 
 ## Quick start
 
@@ -32,5 +29,21 @@ Open http://localhost:5173 to use the app.
 
 ## Notes
 
-- The app uses the Anthropic Claude API for answers.
-- If you want to use your own API key or proxy, update the request headers in `src/App.jsx`.
+- The app performs local document chunking and retrieval with cosine similarity.
+- If you want to use your own API key or proxy for an external LLM, update the request headers in `src/App.jsx`.
+
+## Deployment
+
+This project is ready to deploy as a static site to Vercel, Netlify, or GitHub Pages.
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Build the production bundle:
+   ```bash
+   npm run build
+   ```
+3. Deploy the generated `dist/` folder to your static host.
+
+For Vercel deploys, connect the repo and use the default Vite settings. For Netlify, drop the `dist/` folder or configure `npm run build` with `dist` as the publish directory.
