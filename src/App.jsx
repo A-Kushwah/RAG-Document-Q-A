@@ -49,6 +49,29 @@ function formatScore(score) {
   return `${Math.round(score * 1000) / 1000}`;
 }
 
+function extractSnippet(text, query) {
+  const normalizedQuery = normalizeText(query).toLowerCase();
+  const terms = normalizedQuery.split(' ').filter(Boolean);
+  const lowerText = text.toLowerCase();
+  let bestIndex = -1;
+
+  for (const term of terms) {
+    const index = lowerText.indexOf(term);
+    if (index >= 0 && (bestIndex === -1 || index < bestIndex)) {
+      bestIndex = index;
+    }
+  }
+
+  const snippetLength = 180;
+  const start = bestIndex >= 0 ? Math.max(0, bestIndex - 40) : 0;
+  let snippet = text.slice(start, start + snippetLength).trim();
+  if (snippet.length < text.length && !snippet.endsWith('…')) {
+    snippet = `${snippet}…`;
+  }
+
+  return snippet;
+}
+
 function App() {
   const [documents, setDocuments] = useState([]);
   const [chunks, setChunks] = useState([]);
@@ -113,11 +136,18 @@ function App() {
       .sort((a, b) => b.score - a.score)
       .slice(0, RESULT_LIMIT);
 
-    setResults(scored);
+    const filtered = scored.map((item) => ({
+      ...item,
+      snippet: extractSnippet(item.text, trimmedQuery),
+    }));
 
-    const topText = scored.map((item, index) => `${index + 1}. ${item.text}`).join('\n\n');
+    setResults(filtered);
+
+    const topText = filtered
+      .map((item, index) => `${index + 1}. ${item.snippet}`)
+      .join('\n\n');
     const generated =
-      scored.length > 0
+      filtered.length > 0
         ? `Here are the most relevant passages for “${trimmedQuery}”:\n\n${topText}`
         : 'No matching content found. Try a broader question or add more information.';
 
@@ -211,7 +241,7 @@ function App() {
               {results.map((item) => (
                 <li key={item.id}>
                   <div className="result-score">Score: {formatScore(item.score)}</div>
-                  <p>{item.text}</p>
+                  <p>{item.snippet}</p>
                 </li>
               ))}
             </ol>
