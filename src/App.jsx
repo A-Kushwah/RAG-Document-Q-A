@@ -112,34 +112,44 @@ function App() {
 
       <main className="grid-layout">
         <section className="panel card">
-          <h2>1. Add a document</h2>
+          <h2>Add a document</h2>
           <p>
             Paste in your text or notes. The app breaks longer documents into smaller pieces so
             it can find the right answer faster.
           </p>
+          <label htmlFor="document-input">Document text</label>
           <textarea
+            id="document-input"
             value={documentText}
             onChange={(event) => setDocumentText(event.target.value)}
             placeholder="Paste your document text here..."
             rows={10}
+            aria-label="Document text to be indexed"
           />
           <div className="actions-row">
             <button onClick={addDocument} className="primary-button">
               Add document
             </button>
-            <button onClick={resetApp} className="secondary-button">
+            <button
+              onClick={resetApp}
+              className="secondary-button"
+              
+            >
               Clear everything
             </button>
           </div>
         </section>
 
         <section className="panel card">
-          <h2>2. Ask it questions</h2>
+          <h2>Ask questions</h2>
           <p>Type a question about the document and get the most relevant snippets back.</p>
+          <label htmlFor="query-input">Your question</label>
           <input
+            id="query-input"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="What do you want to know?"
+            aria-label="Question about the indexed document"
           />
           <div className="actions-row">
             <button onClick={askQuestion} className="primary-button" disabled={loading}>
@@ -149,7 +159,7 @@ function App() {
 
           <div className="result-panel">
             <h3>Answer preview</h3>
-            <pre>{answer}</pre>
+            <pre aria-live="polite" aria-atomic="true">{answer}</pre>
           </div>
         </section>
 

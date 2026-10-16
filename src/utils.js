@@ -52,11 +52,13 @@ export function extractSnippet(text, query) {
   const terms = normalizedQuery.split(' ').filter(Boolean);
   const lowerText = text.toLowerCase();
   let bestIndex = -1;
-
+  // Find the earliest occurrence of any term, which usually gives best context
   for (const term of terms) {
     const index = lowerText.indexOf(term);
-    if (index >= 0 && (bestIndex === -1 || index < bestIndex)) {
-      bestIndex = index;
+    if (index >= 0) {
+      if (bestIndex === -1 || index < bestIndex) {
+        bestIndex = index;
+      }
     }
   }
 
